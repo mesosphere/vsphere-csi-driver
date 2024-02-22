@@ -26,7 +26,7 @@ set -x
 DO_WINDOWS_BUILD=${DO_WINDOWS_BUILD_ENV:-true}
 
 # BASE_REPO is the root path of the image repository
-readonly BASE_IMAGE_REPO=gcr.io/cloud-provider-vsphere
+readonly BASE_IMAGE_REPO=ghcr.io/mesosphere/cloud-provider-vsphere
 
 # Release images
 readonly CSI_IMAGE_RELEASE=${BASE_IMAGE_REPO}/csi/release/driver
@@ -47,7 +47,7 @@ SYNCER_IMAGE_NAME=
 if [[ "$(git rev-parse --abbrev-ref HEAD)" =~ "master" ]]; then
   VERSION="$(git log -1 --format=%h)"
 else
-  VERSION="$(git describe --always 2>/dev/null)"
+  VERSION="$(git describe --tags --always 2>/dev/null)"
 fi
 GIT_COMMIT="$(git log -1 --format=%H)"
 GCR_KEY_FILE="${GCR_KEY_FILE:-}"
